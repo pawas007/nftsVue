@@ -1,17 +1,10 @@
 <template>
-<div>
-  <main-header/>
-  <router-view/>
-</div>
-
-
-
-
-
+  <div>
+    <main-header/>
+    <router-view/>
+  </div>
 </template>
-
 <script>
-
 
 
 import MainHeader from "@/components/main-header";

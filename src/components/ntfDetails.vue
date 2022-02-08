@@ -88,7 +88,7 @@
           </tr>
           </thead>
           <transition-group name="slide-fade" tag="tbody" >
-            <tr  v-for="(row, index) in rows" :key=index >
+            <tr  v-for="(row, index) in rows" :key=index+1 >
               <td v-html="row.event"></td>
               <td> {{ row.price }}</td>
               <td :class="row.type"> {{ row.from }}</td>

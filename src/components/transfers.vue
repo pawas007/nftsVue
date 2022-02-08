@@ -2,10 +2,7 @@
   <div>
 
     <div class="transfer_wrap">
-
-
       <div class="history">
-
         <p class="history_title">Item Activity</p>
         <table width="960">
           <thead>
@@ -18,8 +15,8 @@
           </tr>
           </thead>
           <transition-group name="slide-fade" tag="tbody">
-            <tr v-for="(row, index) in rows" :key=index>
-              <td class="eventsa"><p v-html="row.event.icon"></p>   <span>{{ row.event.name }}</span></td>
+          <tr v-for="(row, index) in rows" :key=index+1>
+              <td :class="index" class="eventsa"><p v-html="row.event.icon"></p>   <span>{{ row.event.name }}</span></td>
               <td> {{ row.price }}</td>
               <td :class="row.type"><a href="#">{{ row.from }} </a></td>
               <td><a href="#">{{ row.to }}</a></td>
@@ -114,14 +111,14 @@ export default {
     }
   },
 
-  // mounted() {
-  //   setInterval(() => {
-  //     this.rows.shift()
-  //     setTimeout(() => {
-  //       this.rows.push(this.rows[Math.floor(Math.random() * this.rows.length)])
-  //     }, 800)
-  //   }, 3000)
-  // },
+  mounted() {
+    setInterval(() => {
+      this.rows.shift()
+      setTimeout(() => {
+        this.rows.push(this.rows[Math.floor(Math.random() * this.rows.length)])
+      }, 800)
+    }, 3000)
+  },
 }
 </script>
 
@@ -131,10 +128,6 @@ export default {
   font-family: "Font Awesome 6 Free" !important;
   font-weight: 900;
 
-}
-
-.qq {
-  color: red !important;
 }
 
 .transfer_wrap {
@@ -213,20 +206,13 @@ export default {
               i {
                 margin-left: 10px;
               }
-
               color: rgb(32, 129, 226);
               text-decoration: none;
             }
-
-
           }
         }
       }
-
-
     }
   }
 }
-
-
 </style>

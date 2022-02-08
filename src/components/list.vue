@@ -15,7 +15,7 @@
 
 
         <transition-group name="slide-fade" tag="tbody">
-          <tr v-for="(row, index) in rows" :key=index>
+          <tr v-for="(row, index) in rows" :key=index+1>
             <th class="item">
               <div class="image">
                 <img :src=" row.item.image">
