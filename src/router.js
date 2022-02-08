@@ -7,7 +7,7 @@ import nftConcept from "@/components/nftConcept";
 import nfts from "@/components/nfts";
 import ntfDetails from "@/components/ntfDetails";
 import ntfsBigger from "@/components/ntfsBigger";
-import App from "@/App";
+import transfers from "@/components/transfers";
 
 
 Vue.use(VueRouter);
@@ -49,6 +49,12 @@ const routes = [
         name: 'ntfsBigger',
         component:  ntfsBigger,
     },
+    {
+        path: '/transfers',
+        name: 'transfers',
+        component:  transfers,
+    },
+
 
 
 

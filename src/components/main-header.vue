@@ -27,6 +27,13 @@
           <li class="nav-item">
             <router-link :to="{name:'ntfsBigger'}" class="nav-link">ntfsBigger</router-link>
           </li>
+
+          <li class="nav-item">
+            <router-link :to="{name:'transfers'}" class="nav-link">transfers</router-link>
+          </li>
+
+
+
         </ul>
       </div>
     </nav>

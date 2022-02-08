@@ -1,5 +1,5 @@
 <template>
-  <div class="all_wrap" >
+  <div class="all_wrap">
     <div class="temp_wrap">
     </div>
     <section class="concept">
@@ -31,8 +31,13 @@
             <div class="btc_price">62ETH <span>(80.2342.2334)</span></div>
           </div>
           <div class="price_actions">
+
+            <div class="quantity">
+              <span @click="quality++" class="minus_quantity">-</span>
+              <div class="count">{{ quality }}</div>
+              <span @click="quality++" class="plus_quantity">+</span>
+            </div>
             <button>Buy Now</button>
-            <button>Male an Offer</button>
           </div>
         </div>
         <div class="details__history">
@@ -70,6 +75,11 @@
 <script>
 export default {
   name: "nftConcept",
+  data() {
+    return {
+      quality: 0
+    }
+  },
   methods: {
 
     openBox() {
@@ -200,6 +210,29 @@ body {
       }
 
       .price_actions {
+
+
+        display: flex;
+        align-items: center;
+
+        .quantity {
+          display: flex;
+          align-items: center;
+          margin-right: 20px;
+          border: 1px solid black;
+          border-radius: 40px;
+          padding: 12px;
+
+          * {
+            cursor: pointer;
+            font-size: 20px;
+          }
+
+          .count {
+            padding: 0 20px;
+          }
+        }
+
         button {
           margin-left: 10px;
           padding: 15px;
@@ -247,10 +280,10 @@ body {
         padding: 15px;
         background: #8080801a;
         transition: .5s;
-        display: none;
+        display: block;
 
         &.active {
-          display: block;
+          display: none;
         }
 
         .list_row {
@@ -283,27 +316,59 @@ body {
 }
 
 @media screen and (max-width: 768px) {
-  .concept {
-    flex-direction: column;
-
-  }
-  .all_wrap{
+  .all_wrap {
     padding: 20px;
   }
-  .concept__details .details__price .price_actions button{
-    margin-top: 5px;
-  }
-  .concept__details .details__panel {
-
+  .concept {
     flex-direction: column;
-    gap: 10px;
+  }
+  .concept__details {
+    .details__history .list .list_row {
+
+      flex-direction: column;
+      gap: 10px;
+    }
+
+
+    .details__panel {
+      flex-direction: column;
+      gap: 10px;
+    }
+    .details__price {
+      flex-direction: column;
+      align-items: baseline;
+
+      .price_actions {
+        flex-direction: column;
+        width: 100%;
+
+        .quantity {
+          margin-top: 15px;
+          margin-right: 0;
+          margin-right: 6px;
+          width: 100%;
+          justify-content: space-between;
+          padding: 15px 20px;
+        }
+
+        button {
+          margin-right: 6px;
+          width: 100%;
+          margin-top: 5px;
+          margin-left: 0;
+
+        }
+      }
+    }
   }
 
-  .concept__details .details__history .list .list_row {
 
-    flex-direction: column;
-    gap: 10px;
-  }
+
+
+
+
+
+
 }
 
 
