@@ -88,10 +88,11 @@
           </tr>
           </thead>
           <transition-group name="list-item" tag="tbody" class="list__ul">
+
             <tr class="list__item" v-for="item in items" :key="item.id">
               <td v-html="item.event"></td>
               <td class="price"><img src="../assets/dot.png" alt=""> {{ item.price }}</td>
-              <td > {{ item.from }}</td>
+              <td> {{ item.from }}</td>
               <td> {{ item.to }}</td>
               <td> {{ item.date }}</td>
             </tr>
@@ -108,8 +109,15 @@ export default {
   name: "ntfDetails",
   data() {
     return {
-
+      count:6,
       activetab: '1',
+
+      events:[
+        '<i class="fas fa-tag"></i> Sale',
+        '<i class="fas fa-book"></i> Transfer',
+        '<i class="fas fa-list"></i> List'
+      ],
+
       items: [
         {
           event: '<i class="fas fa-tag"></i> Sale',
@@ -118,7 +126,7 @@ export default {
           to: 'xczannek',
           date: '15 days ago',
           type: 'sale',
-          id: Math.random()
+          id: 1
 
         },
         {
@@ -128,7 +136,7 @@ export default {
           to: 'eewannek',
           date: '13 days ago',
           type: 'transfer',
-          id:2
+          id: 2
         },
         {
           event: '<i class="fas fa-list"></i> List',
@@ -137,7 +145,7 @@ export default {
           to: 'anneksa',
           date: 'a month ago',
           type: 'list',
-          id: Math.random()
+          id: 3
         },
         {
           event: '<i class="fas fa-book"></i> Transfer',
@@ -146,7 +154,7 @@ export default {
           to: 'eewannek',
           date: '13 days ago',
           type: 'transfer',
-          id: Math.random()
+          id: 4
         },
         {
           event: '<i class="fas fa-tag"></i> Sale',
@@ -155,7 +163,7 @@ export default {
           to: 'xczannek',
           date: '15 days ago',
           type: 'sale',
-          id:5
+          id: 5
         }, {
           event: '<i class="fas fa-list"></i> List',
           price: '0,6',
@@ -163,7 +171,7 @@ export default {
           to: 'anneksa',
           date: 'a month ago',
           type: 'list',
-          id: Math.random()
+          id: 6
         }
 
 
@@ -172,17 +180,38 @@ export default {
   },
 
 
-
   mounted() {
 
-    setInterval(()=>{
-      this.items.splice(this.items.length-1,1)
-      this.items.unshift(this.items[Math.floor(Math.random()*this.items.length)])
 
+    setInterval(() => {
+      this.count++
+      this.items.splice(this.items.length - 1, 1)
 
-    },4000)
+      this.items.unshift(this.generateItem())
+    }, 4000)
 
   },
+  methods:{
+    generateItem(){
+
+      let itemItem = this.events[Math.floor(Math.random()*this.events.length)];
+
+      let item = {
+        event: itemItem,
+        price: Math.floor(Math.random() * 100),
+        from: 'sxriffon',
+        to: 'anneksa',
+        date: 'a month ago',
+        type: 'list',
+        id: Math.floor(Math.random() * 1000000)
+      }
+      return item
+    }
+
+  },
+
+
+
 
 }
 </script>
@@ -202,6 +231,7 @@ body {
     font-family: 'Roboto', sans-serif;
   }
 }
+
 .nft-wrap {
   max-width: 960px;
   margin: 50px auto;
@@ -450,13 +480,14 @@ body {
             color: greenyellow;
           }
 
-          &.price{
+          &.price {
             display: flex;
             align-items: center;
-          img{
-            margin-right: 6px;
-            width: 20px;
-          }
+
+            img {
+              margin-right: 6px;
+              width: 20px;
+            }
           }
         }
       }
@@ -469,7 +500,9 @@ body {
   transition: opacity 0.3s, transform 0.3s;
   transform-origin: top center;
 }
-.list-item-enter, .list-item-leave-to /* .list-leave-active for <2.1.8 */ {
+
+.list-item-enter, .list-item-leave-to /* .list-leave-active for <2.1.8 */
+{
   opacity: 0;
   transform: scale(0.5);
 }
@@ -481,7 +514,6 @@ body {
 .list-item-move {
   transition: transform .4s linear .1s;
 }
-
 
 
 </style>
