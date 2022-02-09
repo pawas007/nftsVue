@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class="details__history">
-          <div class="history_head" ref="history_head" @click="openBox">
+          <div class="history_head" ref="history_head">
             <span>Price history</span>
             <i class="fas fa-chevron-down"></i>
           </div>
@@ -80,16 +80,6 @@ export default {
       quality: 0
     }
   },
-  methods: {
-
-    openBox() {
-      this.$refs.history_head.classList.toggle('active')
-      this.$refs.history_list.classList.toggle('active')
-
-    }
-
-  }
-
 }
 </script>
 
@@ -280,12 +270,6 @@ body {
         padding: 15px;
         background: #8080801a;
         transition: .5s;
-        display: block;
-
-        &.active {
-          display: none;
-        }
-
         .list_row {
           display: flex;
           justify-content: space-between;

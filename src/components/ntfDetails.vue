@@ -21,8 +21,8 @@
 
           <div class="tabs">
             <div class="top">
-              <a class="active" href="#">Details</a>
-              <a href="#">Bids</a>
+              <a v-on:click="activetab='1'" href="#" :class="[ activetab === '1' ? 'active' : '' ]">Details</a>
+              <a v-on:click="activetab='2'" href="#" :class="[ activetab === '2' ? 'active' : '' ]">Bids</a>
             </div>
 
             <div class="switcher">
@@ -87,13 +87,13 @@
             <th>Date</th>
           </tr>
           </thead>
-          <transition-group name="slide-fade" tag="tbody" >
-            <tr  v-for="(row, index) in rows" :key=index+1 >
-              <td v-html="row.event"></td>
-              <td> {{ row.price }}</td>
-              <td :class="row.type"> {{ row.from }}</td>
-              <td> {{ row.to }}</td>
-              <td> {{ row.date }}</td>
+          <transition-group name="list-item" tag="tbody" class="list__ul">
+            <tr class="list__item" v-for="item in items" :key="item.id">
+              <td v-html="item.event"></td>
+              <td class="price"><img src="../assets/dot.png" alt=""> {{ item.price }}</td>
+              <td > {{ item.from }}</td>
+              <td> {{ item.to }}</td>
+              <td> {{ item.date }}</td>
             </tr>
           </transition-group>
         </table>
@@ -108,69 +108,80 @@ export default {
   name: "ntfDetails",
   data() {
     return {
-      rows: [
+
+      activetab: '1',
+      items: [
         {
           event: '<i class="fas fa-tag"></i> Sale',
           price: '0,1',
           from: 'griffon',
           to: 'xczannek',
           date: '15 days ago',
-          type: 'sale'
+          type: 'sale',
+          id: Math.random()
+
         },
         {
           event: '<i class="fas fa-book"></i> Transfer',
-          price: '0,1',
+          price: '0,2',
           from: 'griffon',
           to: 'eewannek',
           date: '13 days ago',
-          type: 'transfer'
+          type: 'transfer',
+          id:2
         },
         {
           event: '<i class="fas fa-list"></i> List',
-          price: '0,1',
+          price: '0,3',
           from: 'sxriffon',
           to: 'anneksa',
           date: 'a month ago',
-          type: 'list'
+          type: 'list',
+          id: Math.random()
         },
         {
           event: '<i class="fas fa-book"></i> Transfer',
-          price: '0,1',
+          price: '0,4',
           from: 'griffon',
           to: 'eewannek',
           date: '13 days ago',
-          type: 'transfer'
+          type: 'transfer',
+          id: Math.random()
         },
         {
           event: '<i class="fas fa-tag"></i> Sale',
-          price: '0,1',
+          price: '0,5',
           from: 'griffon',
           to: 'xczannek',
           date: '15 days ago',
-          type: 'sale'
+          type: 'sale',
+          id:5
         }, {
           event: '<i class="fas fa-list"></i> List',
-          price: '0,1',
+          price: '0,6',
           from: 'sxriffon',
           to: 'anneksa',
           date: 'a month ago',
-          type: 'list'
+          type: 'list',
+          id: Math.random()
         }
 
 
-      ]
-
-
+      ],
     }
   },
 
+
+
   mounted() {
-    setInterval(() => {
-      this.rows.shift()
-      setTimeout(() => {
-        this.rows.push(this.rows[Math.floor(Math.random()*this.rows.length)])
-      }, 800)
-    }, 3000)
+
+    setInterval(()=>{
+      this.items.splice(this.items.length-1,1)
+      this.items.unshift(this.items[Math.floor(Math.random()*this.items.length)])
+
+
+    },4000)
+
   },
 
 }
@@ -191,19 +202,6 @@ body {
     font-family: 'Roboto', sans-serif;
   }
 }
-.slide-fade-enter-active {
-  transition: all .3s ease;
-}
-.slide-fade-leave-active {
-  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
-.slide-fade-enter, .slide-fade-leave-to
-  /* .slide-fade-leave-active до версии 2.1.8 */ {
-  transform: translateX(10px);
-  opacity: 0;
-}
-
-
 .nft-wrap {
   max-width: 960px;
   margin: 50px auto;
@@ -212,9 +210,9 @@ body {
     display: flex;
     gap: 40px;
     align-items: center;
-    @media screen and (max-width: 960px){
+    @media screen and (max-width: 960px) {
       flex-direction: column;
-      padding: 20px ;
+      padding: 20px;
     }
 
     .image_side {
@@ -395,10 +393,11 @@ body {
 
   .history {
     width: 100%;
-    @media screen and (max-width: 960px){
+    @media screen and (max-width: 960px) {
       overflow-x: scroll;
-      padding: 20px ;
+      padding: 20px;
     }
+
     .history_title {
       padding: 50px 15px 30px 0;
       font-weight: 700;
@@ -424,7 +423,6 @@ body {
       }
 
       tr {
-        transition: ease-in-out .9s;
 
 
         td {
@@ -451,9 +449,39 @@ body {
           &.list {
             color: greenyellow;
           }
+
+          &.price{
+            display: flex;
+            align-items: center;
+          img{
+            margin-right: 6px;
+            width: 20px;
+          }
+          }
         }
       }
     }
   }
 }
+
+.list-item-enter-active,
+.list-item-leave-active {
+  transition: opacity 0.3s, transform 0.3s;
+  transform-origin: top center;
+}
+.list-item-enter, .list-item-leave-to /* .list-leave-active for <2.1.8 */ {
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+.list-item-leave-active {
+  position: absolute;
+}
+
+.list-item-move {
+  transition: transform .4s linear .1s;
+}
+
+
+
 </style>
