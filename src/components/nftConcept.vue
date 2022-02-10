@@ -305,6 +305,12 @@ body {
   }
   .concept {
     flex-direction: column;
+
+
+  .concept__image{
+
+    max-width: 100%;
+  }
   }
   .concept__details {
     .details__history .list .list_row {
@@ -317,6 +323,7 @@ body {
     .details__panel {
       flex-direction: column;
       gap: 10px;
+      align-items: flex-start;
     }
     .details__price {
       flex-direction: column;
